@@ -15,8 +15,7 @@ It consists of 5 seperate projects, which each can be build seperatly by executi
 
 ├── ProjectName
 │   ├── src
-│   │   ├── main.c
-│   │   
+│   │   ├── main.c   
 │   └── web
 │       ├── app.js
 │       ├── build
