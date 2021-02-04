@@ -13,6 +13,7 @@ Download or clone the repository.
 
 It consists of 5 seperate projects, which each can be build seperatly by executing the build.sh script. Each project has the same or a similar structure:
 
+<pre>
 ├── ProjectName
 │   ├── src
 │   │   ├── main.c   
@@ -21,6 +22,7 @@ It consists of 5 seperate projects, which each can be build seperatly by executi
 │       ├── build
 │       │   ├── build.sh
 │       └── index.html
+</pre>
 
 In order to execute a build script type:
 ```bash
