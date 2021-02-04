@@ -1,0 +1,67 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 15em;
+}
+
+h1 {
+    padding: 0;
+    margin: 0; 
+    width: 30%;
+    text-decoration: underline;
+}
+
+main {
+    margin-top: 2%;
+    width: 30%;
+}
+
+p {
+    width: 30%;
+}
+
+.file-content {
+    background-color: #cccccc;
+    height: 20em;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.bt-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content-container button {
+    margin-top: 2em;
+    border-style: none;
+    width: 5em;
+    height: 2em;
+    color: whitesmoke;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.content-container button:focus {
+    outline: none;
+}
+
+.bt-save {
+    background-color: rgb(40, 161, 61);
+}
+
+.bt-clear {
+    background-color: rgb(224, 150, 12);
+}
