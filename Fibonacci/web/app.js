@@ -6,8 +6,18 @@ const divResult = document.querySelector("#fib-sequence") || null;
 
 // SETUP ------------------------------------------------------------------------------
 
+/**
+ * If true, WebAssembly is successfully loaded
+ */
 let wasmLoaded = false;
+
+/**
+ * Contains the C-Function: calc_fib_sequence()
+ * @param {number} limit
+ * @param {number} ptr, to save the sequence in
+ */
 let calcFib = null;
+
 Module.onRuntimeInitialized = () => {
     wasmLoaded = true;
     calcFib = Module.cwrap("calc_fib_sequence", "number", ["number", "number"]);
@@ -17,6 +27,11 @@ Module.onRuntimeInitialized = () => {
 
 // FUNCTIONS --------------------------------------------------------------------------
 
+/**
+ * Casting given string into decimal number.
+ * @param {string} str 
+ * @returns casted str or null
+ */
 function toNumb(str = "") {
     if (str.length > 0) {
         return Number.parseInt(str);
@@ -24,10 +39,19 @@ function toNumb(str = "") {
     return null;
 }
 
+/**
+ * Resets the input field from HTML
+ */
 function resetInput() {
     input.value = "";
 }
 
+/**
+ * Writes an empty array of a given size into the
+ * WebAssembly memory in uint8 format.
+ * @param {number} size 
+ * @returns {number} ptr, which points to the array address
+ */
 function writeToMem(size = 0) {
     if (size > 0 && typeof size == "number") {
         const length = size, offset = 1;
@@ -39,6 +63,14 @@ function writeToMem(size = 0) {
     }
 }
 
+/**
+ * Reads an array from the WebAssembly memory, using
+ * the given pointer and length.
+ * @param {*} ptr, to the array address 
+ * @param {*} length, of the array to restrict memory 
+ * access to the arrays length
+ * @returns {Array} array
+ */
 function readFromMem(ptr=null, length=0) {
     const resultArr = [];
     if (ptr && length > 0) {
@@ -48,6 +80,10 @@ function readFromMem(ptr=null, length=0) {
     return resultArr;
 }
 
+/**
+ * Writes the given array into a HTML div element.
+ * @param {Array} resArr 
+ */
 function displayResult(resArr=[]) {
     divResult.innerText = resArr.toString();
 }
@@ -69,13 +105,19 @@ if (btCalc == null || input == null || btClear == null || divResult == null) {
             const limitStr = input.value;
             const limit = toNumb(limitStr);
 
+            // Write empty array into memory, for the C-Code to access
+            // and create pointer to reference it
             const ptr = writeToMem(limit);
 
+            // Call function from C-Code
             calcFib(limit, ptr);
 
+            // Retrieve values from memory
             const resArr = readFromMem(ptr, limit);
+
             displayResult(resArr);
             
+            // Important to free the reserved address space form memory
             Module._free(ptr);
             resetInput();
         }
