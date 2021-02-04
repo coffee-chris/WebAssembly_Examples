@@ -1,5 +1,5 @@
 # WebAssembly_Examples
-Basic example programs on how you can use WebAssembly inside the Browser
+A collection of example programs on how you can use WebAssembly inside the Browser.
 
 ## Requirements
 This project uses the Emscripten compiler toolchain.
@@ -11,24 +11,37 @@ Besides Emscripten, the project contains shell scripts in order to execute the b
 ## Installation
 Download or clone the repository. 
 
-The respository consists of 5 seperate projects, which each can be build seperatly by executing the build.sh script:
+It consists of 5 seperate projects, which each can be build seperatly by executing the build.sh script. Each project has the same or a similar structure:
+
+├── ProjectName
+│   ├── src
+│   │   ├── main.c
+│   │   
+│   └── web
+│       ├── app.js
+│       ├── build
+│       │   ├── build.sh
+│       └── index.html
+
+In order to execute a build script type:
 ```bash
 ./build.sh
 ```
+After execution, the build directory will contain the compiled files.
 
-Before you can execute the script, you first must add Emscripten to your PATH, if you haven't done so already:
+Before you can execute the script however, you must first add Emscripten to your **PATH**, if you haven't done so already:
 ```bash
 cd emsdk
 source emsdk_env.sh
 ```
 
-After the build process finished, you can host the html file from a local http server, in order to start the application.
+After the build process has finished, you can host the HTML file from a local http server, in order to start the application.
 
 ## Description
-As already mentioned, the repository consists of 5 seperate projects. The following chapters give a quick overview on what to expect from the project and what it's main features are.
+As already mentioned, the repository consists of 5 seperate projects. The following chapters gives a quick overview on what to expect from the projects and what their main features are.
 
 ### HelloWorld
-This is just a basic hello world application. It uses Emscripten to auto generate Javascript as well as HTML. The C code the app uses simple prints a hello world to the console.
+This is a basic hello world application. It uses Emscripten to auto generate Javascript as well as HTML. The C code the app uses simply prints a hello world to the console.
 
 ### Calculator
 The calculator project demonstrates how you can call functions written in C out of Javascript, using [ccall](https://emscripten.org/docs/api_reference/preamble.js.html?highlight=ccall#ccall). It also uses the [emscripten.h library](https://emscripten.org/docs/api_reference/emscripten.h.html?highlight=emscripten_keepalive#compiling), to keep functions alive during compilation.
