@@ -75,7 +75,7 @@ btSubmit.addEventListener("click", ev => {
     if (wasmReady && isPalindrom != null) {
 
         // retrieve input value
-        const str = inputBox.value;
+        const str = inputBox.value.toLowerCase();
         const ptr = writeToMem(str);
 
         const result = isPalindrom(ptr, str.length);
